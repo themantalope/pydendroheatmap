@@ -45,7 +45,7 @@ To see a built-in example, run these commands in the python interpreter:
 
 The example should make a plot that will look similar to this:
 
-![Example Image](https://github.com/themantalope/pendendroheatmap/exampledata/example.png)
+![Example Image](https://github.com/themantalope/pydendroheatmap/blob/master/pydendroheatmap/exampledata/example.png)
 
 
 The DendroHeatMap object's `render_plot()` function will generate a heat plot, similar in fashion to the one found here:
