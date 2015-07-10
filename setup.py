@@ -1,7 +1,7 @@
 from setuptools import setup
 
 def readme():
-    f = open('README.rst','r')
+    f = open('README.md','r')
     text = f.read()
     f.close()
     return text
