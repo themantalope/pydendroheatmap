@@ -1,4 +1,4 @@
-#PyDendroHeatMap - a plotting tool for making heatmaps with hierarchically clustered data in python.
+#pydendroheatmap - a plotting tool for making heatmaps with hierarchically clustered data in python.
 ---------------------------------------------------------------------------------------------------
 
 To make a plot, simply import the package, and create a DendroHeatMap object. Data for the heatmap and
