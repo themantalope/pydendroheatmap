@@ -33,7 +33,7 @@ data should be in the form of a (n-1) x 4 linkage matrix used in the scipy hiera
     #excellent, let's export it
 
     heatmap.export('awesome_heatmap_plot.png')
-```
+
 
 
 To see a built-in example, run these commands in the python interpreter:
@@ -41,7 +41,7 @@ To see a built-in example, run these commands in the python interpreter:
 ```python
     >>>from pydendroheatmap import example
     >>>example.run()
-```
+
 
 The DendroHeatMap object's ```render_plot()``` function will generate a heat plot, similar in fashion to the one found here:
 
