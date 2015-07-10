@@ -56,3 +56,6 @@ Each time the DendroHeatMap object's `show()`, `export()`, and `render_plot()` f
 the plot will be reset and any changes that have been made to the plot's instance variables should be taken into account
 in the new plot.
 
+A special thanks to [Nathan Salomonis](http://www.cincinnatichildrens.org/bio/s/nathan-salomonis/) for posting the
+original source as an example!
+
