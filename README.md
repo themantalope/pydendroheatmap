@@ -57,5 +57,5 @@ the plot will be reset and any changes that have been made to the plot's instanc
 in the new plot.
 
 A special thanks to [Nathan Salomonis](http://www.cincinnatichildrens.org/bio/s/nathan-salomonis/) for posting the
-original source as an example!
+original example and figuring out much of the parameters for getting the plots in the correct position!
 
