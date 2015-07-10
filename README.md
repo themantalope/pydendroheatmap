@@ -6,6 +6,12 @@ pydendroheatmap is registered as a package on PyPI, so to install, simply type
 pip install pydendroheatmap
 ```
 
+To install the package from source, download the repository, unpack and open a command line prompt in the unpackaged directory. Then simply type:
+
+```bash
+python setup.py install
+```
+
 
 To make a plot, simply import the package, and create a DendroHeatMap object. Data for the heatmap and
 dendrogram do not need to be specified at the time of creation, however, if no data is supplied then
