@@ -1,4 +1,4 @@
-PyDendroHeatMap - a plotting tool for making heatmaps with hierarchically clustered data in python.
+#PyDendroHeatMap - a plotting tool for making heatmaps with hierarchically clustered data in python.
 ---------------------------------------------------------------------------------------------------
 
 To make a plot, simply import the package, and create a DendroHeatMap object. Data for the heatmap and
@@ -9,45 +9,45 @@ The data for the heat map should be either a numpy.ndarray or numpy.matrix objec
 data should be in the form of a (n-1) x 4 linkage matrix used in the scipy hierarchical clustering package.
 
 ```python
-    import pydendroheatmap as pdh
-    try: import cPickle as pickle
-    except: import pickle
+import pydendroheatmap as pdh
+try: import cPickle as pickle
+except: import pickle
 
-    heatmap_array = pickle.load(open('some_data_file.pickle'))
-    top_dendrogram = pickle.load(open('another_data_file.pickle'))
-    side_dendrogram = pickle.load(open('a_third_data_file.pickle'))
+heatmap_array = pickle.load(open('some_data_file.pickle'))
+top_dendrogram = pickle.load(open('another_data_file.pickle'))
+side_dendrogram = pickle.load(open('a_third_data_file.pickle'))
 
-    heatmap = pdh.DendroHeatMap(heat_map_data=heatmap_array, left_dendrogram=side_dendrogram, top_dendrogram=top_dendrogram)
-    heatmap.title = 'This is an example'
-    heatmap.show()
+heatmap = pdh.DendroHeatMap(heat_map_data=heatmap_array, left_dendrogram=side_dendrogram, top_dendrogram=top_dendrogram)
+heatmap.title = 'This is an example'
+heatmap.show()
 
-    heatmap.colormap = heatmap.yellowBlackBlue
+heatmap.colormap = heatmap.yellowBlackBlue
 
-    heatmap.show()
+heatmap.show()
 
-    heatmap.row_labels = ['some', 'row','labels'] #must have the same number of rows in heat_map_data
+heatmap.row_labels = ['some', 'row','labels'] #must have the same number of rows in heat_map_data
 
-    heatmap.reset_plot()
-    heatmap.show()
+heatmap.reset_plot()
+heatmap.show()
 
-    #excellent, let's export it
+#excellent, let's export it
 
-    heatmap.export('awesome_heatmap_plot.png')
-
+heatmap.export('awesome_heatmap_plot.png')
+```
 
 
 To see a built-in example, run these commands in the python interpreter:
 
 ```python
-    >>>from pydendroheatmap import example
-    >>>example.run()
+>>>from pydendroheatmap import example
+>>>example.run()
+```
 
-
-The DendroHeatMap object's ```render_plot()``` function will generate a heat plot, similar in fashion to the one found here:
+The DendroHeatMap object's `render_plot()` function will generate a heat plot, similar in fashion to the one found here:
 
 http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/
 
-Each time the DendroHeatMap object's ```show()```, ```export()```, and ```render_plot()``` functions are called,
+Each time the DendroHeatMap object's `show()`, `export()`, and `render_plot()` functions are called,
 the plot will be reset and any changes that have been made to the plot's instance variables should be taken into account
 in the new plot.
 
