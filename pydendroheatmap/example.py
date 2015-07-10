@@ -21,16 +21,23 @@ def run():
     #cluster the rows
     row_dist = ssd.squareform(ssd.pdist(data))
     row_Z = sch.linkage(row_dist)
+    row_idxing = sch.leaves_list(row_Z)
 
     row_labels = 50 * ['blah']
 
     #cluster the columns
     col_dist = ssd.squareform(ssd.pdist(data.T))
     col_Z = sch.linkage(col_dist)
+    col_idxing = sch.leaves_list(col_Z)
     #make the dendrogram
+
+    col_labels = 50 * ['blah']
+
+    data = data[:,col_idxing][row_idxing,:]
 
     heatmap = pdh.DendroHeatMap(heat_map_data=data, left_dendrogram=row_Z, top_dendrogram=col_Z)
     heatmap.row_labels = row_labels
+    heatmap.col_labels = col_labels
     heatmap.title = 'An example heatmap'
     heatmap.show()
     """
@@ -42,15 +49,19 @@ def run():
     #cluster the rows
     row_dist = ssd.squareform(ssd.pdist(data))
     row_Z = sch.linkage(row_dist)
+    row_idxing = sch.leaves_list(row_Z)
 
     row_labels = 50 * ['blah']
 
     #cluster the columns
     col_dist = ssd.squareform(ssd.pdist(data.T))
     col_Z = sch.linkage(col_dist)
+    col_idxing = sch.leaves_list(col_Z)
     #make the dendrogram
 
     col_labels = 50 * ['blah']
+
+    data = data[:,col_idxing][row_idxing,:]
 
     heatmap = pdh.DendroHeatMap(heat_map_data=data, left_dendrogram=row_Z, top_dendrogram=col_Z)
     heatmap.row_labels = row_labels
