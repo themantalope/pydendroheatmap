@@ -1,5 +1,11 @@
 #pydendroheatmap - a plotting tool for making heatmaps with hierarchically clustered data in python.
 ---------------------------------------------------------------------------------------------------
+pydendroheatmap is registered as a package on PyPI, so to install, simply type
+
+```bash
+pip install pydendroheatmap
+```
+
 
 To make a plot, simply import the package, and create a DendroHeatMap object. Data for the heatmap and
 dendrogram do not need to be specified at the time of creation, however, if no data is supplied then
