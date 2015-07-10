@@ -43,6 +43,11 @@ To see a built-in example, run these commands in the python interpreter:
 >>>example.run()
 ```
 
+The example should make a plot that will look similar to this:
+
+![alt text](exampledata/example.png "Example Heatmap")
+
+
 The DendroHeatMap object's `render_plot()` function will generate a heat plot, similar in fashion to the one found here:
 
 http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/

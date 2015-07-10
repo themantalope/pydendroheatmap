@@ -25,6 +25,12 @@ class DendroHeatMap(object):
                  verbose=False):
 
         self.figure = None
+        self.verbose= verbose
+
+        # print 'should be moving into setter land....'
+        self.heat_map_data = heat_map_data
+        self.top_dendrogram = top_dendrogram
+        self.left_dendrogram = left_dendrogram
 
         #set the default behaviors
         self.window_height=window_height
@@ -83,17 +89,14 @@ class DendroHeatMap(object):
         self.yellowBlackBlue=self.__YellowBlackBlue()
         self.colormap=self.redBlackGreen
 
-        # print 'should be moving into setter land....'
-        self.heat_map_data = heat_map_data
-        self.top_dendrogram = top_dendrogram
-        self.left_dendrogram = left_dendrogram
+
 
         self.left_dendro_title = ''
         self.top_dendro_title = ''
         self.title = ''
         self.color_legend_title = ''
         self.plotRendered = False
-        self.verbose= verbose
+
         self.exportDPI = 600
 
 
@@ -110,7 +113,7 @@ class DendroHeatMap(object):
         self.figure = pylab.figure(figsize=[self.window_width, self.window_height])
 
         #plot the top dendrogram
-        if(self.top_dendrogram):
+        if(not self.top_dendrogram is None):
             self.top_dendro_axes = self.figure.add_axes([self.top_dendro_x, self.top_dendro_y, self.top_dendro_width, self.top_dendro_height], frame_on=showFrames)
             self.top_dendro_plot = sch.dendrogram(self.top_dendrogram)
             self.top_dendro_axes.set_xticks([])
@@ -118,7 +121,7 @@ class DendroHeatMap(object):
             self.top_dendro_axes.set_title(self.top_dendro_title)
 
         #plot the left dendrogram
-        if(self.left_dendrogram):
+        if(not self.left_dendrogram is None):
             self.left_dendro_axes = self.figure.add_axes([self.left_dendro_x, self.left_dendro_y, self.left_dendro_width, self.left_dendro_height], frame_on=showFrames)
             self.left_dendro_plot = sch.dendrogram(self.left_dendrogram,orientation='right')
             self.left_dendro_axes.set_xticks([])
@@ -126,7 +129,7 @@ class DendroHeatMap(object):
             self.left_dendro_axes.set_title(self.left_dendro_title,rotation='vertical')
 
         #plot the heat map
-        if(self.heat_map_data):
+        if(not self.heat_map_data is None):
             self.heat_map_axes = self.figure.add_axes([self.heat_x, self.heat_y, self.heat_width, self.heat_height], frame_on=showFrames)
             self.heat_map_plot = self.heat_map_axes.matshow(self.heat_map_data, aspect='auto', origin='lower', cmap=self.colormap, norm=self.cmap_norm)
             self.heat_map_axes.set_xticks([])
@@ -148,7 +151,7 @@ class DendroHeatMap(object):
 
 
         #plot the column colorbar
-        if(self.top_dendrogram):
+        if(not self.top_dendrogram is None):
             self.col_cb_axes = self.figure.add_axes([self.col_cb_x, self.col_cb_y, self.col_cb_width, self.col_cb_height], frame_on=True)
             # print self.top_colorbar_labels.shape
             # print 'Col cb'
@@ -158,7 +161,7 @@ class DendroHeatMap(object):
             self.col_cb_axes.set_yticks([])
 
         #plot the row colorbar
-        if(self.left_dendrogram):
+        if(not self.left_dendrogram is None):
             self.row_cb_axes = self.figure.add_axes([self.row_cb_x, self.row_cb_y, self.row_cb_width, self.row_cb_height], frame_on=True)
             # print self.left_colorbar_labels.shape
             # print 'Row cb'
@@ -168,7 +171,7 @@ class DendroHeatMap(object):
             self.row_cb_axes.set_yticks([])
 
         #plot the color legend
-        if(self.heat_map_data):
+        if(not self.heat_map_data is None):
             self.color_legend_axes = self.figure.add_axes([self.color_legend_x, self.color_legend_y, self.color_legend_width, self.color_legend_height], frame_on=showFrames)
             self.color_legend_plot = mpl.colorbar.ColorbarBase(self.color_legend_axes, cmap=self.colormap, norm=self.cmap_norm,orientation='horizontal')
             tl=mpl.ticker.MaxNLocator(nbins=self.color_legend_ticks)
@@ -239,7 +242,7 @@ class DendroHeatMap(object):
     @figure.setter
     def figure(self,figure):
         self.__figure = figure
-        if((not isinstance(figure, pylab.Figure)) & (figure)):
+        if((not isinstance(figure, pylab.Figure)) & (isinstance(figure,object))):
             #this force's the figure to either be "None" type or a pylab.Figure object
             self.__figure = None
 
@@ -250,10 +253,11 @@ class DendroHeatMap(object):
 
     @row_labels.setter
     def row_labels(self, row_labels):
-        if(not self.heat_map_data):
-            print """Warning: data for heat map not yet specified, be sure that the number of elements in row_labels
-            is equal to the number of rows in heat_map_data.
-            """
+        if(not isinstance(self.heat_map_data,np.ndarray) or not isinstance(self.heat_map_data, np.matrix)):
+            if(self.verbose):
+                print """Warning: data for heat map not yet specified, be sure that the number of elements in row_labels
+                is equal to the number of rows in heat_map_data.
+                """
             self.__row_labels = row_labels
         else:
             if(len(row_labels) != self.heat_map_data.shape[0]):
@@ -270,10 +274,11 @@ class DendroHeatMap(object):
 
     @col_labels.setter
     def col_labels(self, col_labels):
-        if(not self.heat_map_data):
-            print """Warning: data for heat map not yet specified, be sure that the number of elements in col_labels
-            is equal to the number of columns in heat_map_data.
-            """
+        if(not isinstance(self.heat_map_data,np.ndarray) or not isinstance(self.heat_map_data, np.matrix)):
+            if(self.verbose):
+                print """Warning: data for heat map not yet specified, be sure that the number of elements in col_labels
+                is equal to the number of columns in heat_map_data.
+                """
             self.__col_labels = col_labels
         else:
             if(len(col_labels) != self.heat_map_data.shape[0]):

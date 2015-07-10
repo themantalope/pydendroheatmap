@@ -50,8 +50,11 @@ def run():
     col_Z = sch.linkage(col_dist)
     #make the dendrogram
 
+    col_labels = 50 * ['blah']
+
     heatmap = pdh.DendroHeatMap(heat_map_data=data, left_dendrogram=row_Z, top_dendrogram=col_Z)
     heatmap.row_labels = row_labels
+    heatmap.col_labels = col_labels
     heatmap.title = 'An example heatmap'
     heatmap.show()
 
