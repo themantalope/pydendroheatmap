@@ -1,9 +1,9 @@
 Metadata-Version: 1.1
 Name: pydendroheatmap
-Version: 1.0.1
-Summary: Tool for creating heatmaps, where rows and columns are organized by hierarchical clustersas seen in http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/
+Version: 1.0.3
+Summary: Tool for creating heatmaps, where rows and columns are organized by hierarchical clusters as seen in http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/
 Home-page: https://github.com/themantalope/pydendroheatmap
-Author: Matt Antalek
+Author: Matt Antalek Jr
 Author-email: matthew.antalek@northwestern.edu
 License: MIT
 Description: #pydendroheatmap - a plotting tool for making heatmaps with hierarchically clustered data in python.
@@ -12,6 +12,12 @@ Description: #pydendroheatmap - a plotting tool for making heatmaps with hierarc
         
         ```bash
         pip install pydendroheatmap
+        ```
+        
+        To install the package from source, download the repository, unpack and open a command line prompt in the unpackaged directory. Then simply type:
+        
+        ```bash
+        python setup.py install
         ```
         
         
