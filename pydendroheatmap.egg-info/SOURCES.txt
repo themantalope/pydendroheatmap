@@ -1,4 +1,5 @@
 MANIFEST.in
+README.md
 setup.py
 pydendroheatmap/__init__.py
 pydendroheatmap/example.py
