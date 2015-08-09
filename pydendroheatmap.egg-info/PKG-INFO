@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: pydendroheatmap
-Version: 1.1
+Version: 1.2
 Summary: Tool for creating heatmaps, where rows and columns are organized by hierarchical clusters as seen in http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/
 Home-page: https://github.com/themantalope/pydendroheatmap
 Author: Matt Antalek Jr

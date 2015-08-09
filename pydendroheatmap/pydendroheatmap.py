@@ -327,13 +327,16 @@ class DendroHeatMap(object):
 
     @top_dendrogram.setter
     def top_dendrogram(self,top_dendrogram):
-        self.__top_dendrogram = top_dendrogram
-        self.resetPlot()
         if(isinstance(top_dendrogram,np.ndarray)):
+            self.__top_dendrogram = top_dendrogram
+            self.resetPlot()
             self.top_colorbar_labels = np.array(sch.fcluster(top_dendrogram,0.7*max(top_dendrogram[:,2]),'distance'),dtype=int)
             self.top_colorbar_labels.shape = (1,len(self.top_colorbar_labels))
             temp_dendro = sch.dendrogram(top_dendrogram,no_plot=True)
             self.top_colorbar_labels = self.top_colorbar_labels[:,temp_dendro['leaves']]
+        elif top_dendrogram is None:
+            self.__top_dendrogram = top_dendrogram
+            self.resetPlot()
         else:
             raise TypeError('Dendrograms must be a n-1 x 4 numpy.ndarray as per the scipy.cluster.hierarchy implementation!')
 
@@ -343,13 +346,18 @@ class DendroHeatMap(object):
 
     @left_dendrogram.setter
     def left_dendrogram(self,left_dendrogram):
-        self.__left_dendrogram = left_dendrogram
-        self.resetPlot()
-        if(isinstance(left_dendrogram,np.ndarray)):
+
+        if isinstance(left_dendrogram,np.ndarray):
+            self.__left_dendrogram = left_dendrogram
+            self.resetPlot()
             self.left_colorbar_labels = np.array(sch.fcluster(left_dendrogram,0.7 * max(left_dendrogram[:,2]),'distance'), dtype=int)
             self.left_colorbar_labels.shape = (len(self.left_colorbar_labels),1)
             temp_dendro = sch.dendrogram(left_dendrogram,no_plot=True)
             self.left_colorbar_labels = self.left_colorbar_labels[temp_dendro['leaves'],:]
+        elif left_dendrogram is None:
+            self.__left_dendrogram = left_dendrogram
+            self.resetPlot()
+
         else:
             raise TypeError('Dendrograms must be a n-1 x 4 numpy.ndarray as per the scipy.cluster.hierarchy implementation!')
 

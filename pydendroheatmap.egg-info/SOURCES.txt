@@ -7,5 +7,4 @@ pydendroheatmap/pydendroheatmap.py
 pydendroheatmap.egg-info/PKG-INFO
 pydendroheatmap.egg-info/SOURCES.txt
 pydendroheatmap.egg-info/dependency_links.txt
-pydendroheatmap.egg-info/requires.txt
 pydendroheatmap.egg-info/top_level.txt
