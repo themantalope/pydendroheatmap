@@ -222,8 +222,6 @@ class DendroHeatMap(object):
         if('.' not in filename):
             filename += '.png'
         else:
-            filename = filename[:-4] + '.png'
-
             if(self.verbose):
                 print ('Saving plot to: ', filename)
             self.render_plot()
