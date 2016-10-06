@@ -145,7 +145,7 @@ class DendroHeatMap(object):
         #plot the left dendrogram
         if(not self.left_dendrogram is None):
             self.left_dendro_axes = self.figure.add_axes([self.left_dendro_x, self.left_dendro_y, self.left_dendro_width, self.left_dendro_height], frame_on=showFrames)
-            self.left_dendro_plot = sch.dendrogram(self.left_dendrogram,orientation='right')
+            self.left_dendro_plot = sch.dendrogram(self.left_dendrogram,orientation='left')
             self.left_dendro_axes.set_xticks([])
             self.left_dendro_axes.set_yticks([])
             self.left_dendro_axes.set_title(self.left_dendro_title,rotation='vertical')
@@ -164,7 +164,7 @@ class DendroHeatMap(object):
             for i in range(0, self.heat_map_rows):
                 if(self.row_labels):
                     if(len(self.row_labels) < self.max_row_labels):
-                        self.heat_map_axes.text(self.heat_map_cols-0.5, i, ' '+self.row_labels[i], size=self.row_labels_size)
+                        self.heat_map_axes.text(self.heat_map_cols-0.5, i-0.5, ' '+self.row_labels[i], size=self.row_labels_size)
 
             for i in range(0, self.heat_map_cols):
                 if(self.col_labels):
@@ -208,7 +208,7 @@ class DendroHeatMap(object):
         self.plotRendered = True
 
         if(self.verbose):
-            print 'Plot rendered...'
+            print( 'Plot rendered...')
 
 
     def show(self):
@@ -225,7 +225,7 @@ class DendroHeatMap(object):
             filename = filename[:-4] + '.png'
 
             if(self.verbose):
-                print 'Saving plot to: ', filename
+                print ('Saving plot to: ', filename)
             self.render_plot()
             pylab.savefig(filename,dpi=self.exportDPI)
 
@@ -277,14 +277,14 @@ class DendroHeatMap(object):
     def row_labels(self, row_labels):
         if(not isinstance(self.heat_map_data,np.ndarray) or not isinstance(self.heat_map_data, np.matrix)):
             if(self.verbose):
-                print """Warning: data for heat map not yet specified, be sure that the number of elements in row_labels
+                print ("""Warning: data for heat map not yet specified, be sure that the number of elements in row_labels
                 is equal to the number of rows in heat_map_data.
-                """
+                """)
             self.__row_labels = row_labels
         else:
             if(len(row_labels) != self.heat_map_data.shape[0]):
-                print """Invalid entry for row_labels. Please be sure that the number of elements in row_labels is equal
-                to the number of rows in heat_map_data."""
+                print ("""Invalid entry for row_labels. Please be sure that the number of elements in row_labels is equal
+                to the number of rows in heat_map_data.""")
                 self.__row_labels = None
             else:
                 self.__row_labels = row_labels
@@ -298,14 +298,14 @@ class DendroHeatMap(object):
     def col_labels(self, col_labels):
         if(not isinstance(self.heat_map_data,np.ndarray) or not isinstance(self.heat_map_data, np.matrix)):
             if(self.verbose):
-                print """Warning: data for heat map not yet specified, be sure that the number of elements in col_labels
+                print ("""Warning: data for heat map not yet specified, be sure that the number of elements in col_labels
                 is equal to the number of columns in heat_map_data.
-                """
+                """)
             self.__col_labels = col_labels
         else:
             if(len(col_labels) != self.heat_map_data.shape[0]):
-                print """Invalid entry for col_labels. Please be sure that the number of elements in col_labels is equal
-                to the number of columns in heat_map_data."""
+                print ("""Invalid entry for col_labels. Please be sure that the number of elements in col_labels is equal
+                to the number of columns in heat_map_data.""")
                 self.__col_labels = None
             else:
                 self.__col_labels = col_labels

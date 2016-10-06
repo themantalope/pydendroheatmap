@@ -30,8 +30,8 @@ import scipy.spatial.distance as ssd
 
 def run():
 
-    print 'Here is the source for this example: '
-    print """
+    print ('Here is the source for this example: ')
+    print ("""
     import numpy as np
     import pyDendroHeatMap as pdh
     import scipy.cluster.hierarchy as sch
@@ -63,7 +63,7 @@ def run():
     heatmap.col_labels = col_labels
     heatmap.title = 'An example heatmap'
     heatmap.show()
-    """
+    """)
 
     #make up some data
     data = np.random.normal(scale = 50,size=(50,50))
