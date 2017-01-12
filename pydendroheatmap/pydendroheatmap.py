@@ -22,6 +22,7 @@
 # THE SOFTWARE.
 
 import matplotlib.pyplot as pylab
+import matplotlib
 import matplotlib as mpl
 import scipy.cluster.hierarchy as sch
 import numpy as np
@@ -34,16 +35,50 @@ class DendroHeatMap(object):
     http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/
     """
 
-    def __init__(self, heat_map_data=None, left_dendrogram=None,top_dendrogram=None,
-                 window_height=10, window_width = 14, color_bar_width = 0.015,
-                 left_dendro_x=0.05,left_dendro_y=0.22,left_dendro_width=0.2,left_dendro_height=0.6, left_dendro_x_distance_to_row_cb=0.004, left_dendro_y_distance_to_col_cb=0.004,
-                 top_dendro_x=0.273, top_dendro_y=0.843, top_dendro_width=0.5, top_dendro_height=0.117,
-                 row_cb_x=0.254,row_cb_y=0.22,row_cb_width=0.015,row_cb_height=0.6,row_cb_on=True,
-                 col_cb_x = 0.273, col_cb_y=0.824, col_cb_width=0.5, col_cb_height=0.015, col_cb_on=True,
-                 heat_x=0.273, heat_y=0.22,heat_width=0.5,heat_height=0.6,
-                 color_legend_x=0.07,color_legend_y=0.88, color_legend_width=0.2,color_legend_height=0.09, color_legend_ticks=7,
-                 row_labels=None, max_row_labels=100, row_labels_size=8,
-                 col_labels=None, max_col_labels=100, col_labels_size=8,
+    def __init__(self,
+                 heat_map_data=None,
+                 left_dendrogram=None,
+                 top_dendrogram=None,
+                 window_height=10,
+                 window_width = 14,
+                 color_bar_width = 0.015,
+                 left_dendro_x=0.05,
+                 left_dendro_y=0.22,
+                 left_dendro_width=0.2,
+                 left_dendro_height=0.6,
+                 left_dendro_x_distance_to_row_cb=0.004,
+                 left_dendro_y_distance_to_col_cb=0.004,
+                 top_dendro_x=0.273,
+                 top_dendro_y=0.843,
+                 top_dendro_width=0.5,
+                 top_dendro_height=0.117,
+                 row_cb_x=0.254,
+                 row_cb_y=0.22,
+                 row_cb_width=0.015,
+                 row_cb_height=0.6,
+                 row_cb_on=True,
+                 col_cb_x = 0.273,
+                 col_cb_y=0.824,
+                 col_cb_width=0.5,
+                 col_cb_height=0.015,
+                 col_cb_on=True,
+                 heat_x=0.273,
+                 heat_y=0.22,heat_width=0.5,
+                 heat_height=0.6,
+                 color_legend_x=0.07,
+                 color_legend_y=0.88,
+                 color_legend_width=0.2,
+                 color_legend_height=0.09,
+                 color_legend_ticks=7,
+                 row_labels=None,
+                 max_row_labels=100,
+                 row_labels_size=8,
+                 col_labels=None,
+                 max_col_labels=100,
+                 col_labels_size=8,
+                 left_colorbar_labels = None,
+                 left_colorbar_legend_names = None,
+                 font_size = 20,
                  verbose=False):
 
         self.figure = None
@@ -72,7 +107,10 @@ class DendroHeatMap(object):
         self.top_dendro_width = top_dendro_width
         self.top_dendro_height=top_dendro_height
 
-        self.cluster_cb_colors = mpl.colors.ListedColormap(['r', 'g', 'b', 'y', 'w', 'k', 'm'])
+        # self.cluster_cb_colors = mpl.colors.ListedColormap(['r', 'g', 'b', 'y', 'w', 'k', 'm'])
+        self.cluster_cb_colors = mpl.colors.LinearSegmentedColormap.from_list(name="custom",
+                                                                              colors=['r', 'g', 'b', 'y', 'w', 'k', 'm'],
+                                                                              N=10)
 
         self.row_cb_x=row_cb_x
         self.row_cb_y = row_cb_y
@@ -118,9 +156,11 @@ class DendroHeatMap(object):
         self.title = ''
         self.color_legend_title = ''
         self.plotRendered = False
-
+        self.font_size = font_size
         self.exportDPI = 600
 
+        self.left_colorbar_labels = left_colorbar_labels
+        self.left_colorbar_legend_names = left_colorbar_legend_names
 
 
 
@@ -128,6 +168,7 @@ class DendroHeatMap(object):
 
     def render_plot(self,showFrames=False):
         self.resetPlot()
+        matplotlib.rcParams.update({"font.size":self.font_size})
 
         if(self.verbose):
             print 'Rendering plot...'
@@ -161,15 +202,16 @@ class DendroHeatMap(object):
 
             #add the from the labels to the figure
             # print len(self.row_labels)
+            row_scale_factor = float(self.window_height) / self.heat_map_data.shape[0]
             for i in range(0, self.heat_map_rows):
                 if(self.row_labels):
                     if(len(self.row_labels) < self.max_row_labels):
-                        self.heat_map_axes.text(self.heat_map_cols-0.5, i-0.5, ' '+self.row_labels[i], size=self.row_labels_size)
+                        self.heat_map_axes.text(self.heat_map_cols-0.5, i-2, ' '+self.row_labels[i], size=self.row_labels_size)
 
             for i in range(0, self.heat_map_cols):
                 if(self.col_labels):
                     if(len(self.col_labels) < self.max_col_labels):
-                        self.heat_map_axes.text(i+0.05, self.heat_map_rows-self.heat_map_rows-0.5, ' '+self.col_labels[i], size=self.col_labels_size, rotation=270,verticalalignment='top')
+                        self.heat_map_axes.text(i-0.2, self.heat_map_rows-self.heat_map_rows-0.5, ' '+self.col_labels[i], size=self.col_labels_size, rotation=270,verticalalignment='top')
 
 
         #plot the column colorbar
@@ -202,6 +244,25 @@ class DendroHeatMap(object):
             self.color_legend_axes.set_title(self.color_legend_title)
             self.heat_map_axes.format_coord = self.__formatCoords
 
+        #plot the row colorbar if its been set
+        if(not self.left_colorbar_labels is None and self.left_dendrogram is None):
+            #reset the colorbar
+            n_cb_classes = len(set(self.left_colorbar_labels[:, 0].tolist()))
+            self.cluster_cb_colors = mpl.colors.LinearSegmentedColormap.from_list(name="custom",
+                                                                                  colors=['r', 'g', 'b', 'y', 'w', 'k', 'm'],
+                                                                                  N=n_cb_classes)
+
+            self.row_cb_axes = self.figure.add_axes([self.row_cb_x, self.row_cb_y, self.row_cb_width, self.row_cb_height], frame_on=True)
+            self.row_cb_plot = self.row_cb_axes.matshow(self.left_colorbar_labels, aspect='auto',origin='lower',cmap=self.cluster_cb_colors)
+            self.row_cb_axes.set_xticks([])
+            self.row_cb_axes.set_yticks([])
+            self.row_cb_axes.legend(label=self.left_colorbar_legend_names)
+
+            # if(not self.left_colorbar_legend_names is None):
+            #     cbaxes = self.figure.add_axes([0.1, 0.1, 0.03, 0.8])
+            #     self.left_colorbar_legend = pylab.colorbar(self.row_cb_plot, cax=cbaxes)
+            #     self.left_colorbar_legend.set_label(self.left_colorbar_legend_names)
+
         self.figure.suptitle(self.title)
 
 
@@ -215,7 +276,6 @@ class DendroHeatMap(object):
         self.resetPlot()
         self.render_plot()
         pylab.show()
-
 
     def export(self,filename):
         self.resetPlot()
@@ -358,6 +418,30 @@ class DendroHeatMap(object):
 
         else:
             raise TypeError('Dendrograms must be a n-1 x 4 numpy.ndarray as per the scipy.cluster.hierarchy implementation!')
+
+
+    @property
+    def left_colorbar_labels(self):
+        return self._left_colorbar_labels
+
+    @left_colorbar_labels.setter
+    def left_colorbar_labels(self, left_colorbar_labels):
+        if isinstance(left_colorbar_labels, list):
+            self._left_colorbar_labels = np.array(left_colorbar_labels)
+            self._left_colorbar_labels.shape = (len(self._left_colorbar_labels), 1)
+        elif isinstance(left_colorbar_labels, np.ndarray):
+            self._left_colorbar_labels = left_colorbar_labels
+            self._left_colorbar_labels.shape = (len(self._left_colorbar_labels), 1)
+
+        elif left_colorbar_labels is None:
+            self._left_colorbar_labels = left_colorbar_labels
+        else:
+            raise TypeError("'left_colorbar_labels' must be a list or numpy.ndarray")
+
+
+
+
+
 
 
     def __RedBlackSkyBlue(self):
