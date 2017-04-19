@@ -76,9 +76,7 @@ class DendroHeatMap(object):
                  col_labels=None,
                  max_col_labels=100,
                  col_labels_size=8,
-                 left_colorbar_labels = None,
-                 left_colorbar_legend_names = None,
-                 font_size = 20,
+                 font_size = 9,
                  verbose=False):
 
         self.figure = None
@@ -159,10 +157,6 @@ class DendroHeatMap(object):
         self.font_size = font_size
         self.exportDPI = 600
 
-        self.left_colorbar_labels = left_colorbar_labels
-        self.left_colorbar_legend_names = left_colorbar_legend_names
-
-
 
 
 
@@ -171,7 +165,7 @@ class DendroHeatMap(object):
         matplotlib.rcParams.update({"font.size":self.font_size})
 
         if(self.verbose):
-            print 'Rendering plot...'
+            print('Rendering plot...')
 
         self.figure = pylab.figure(figsize=[self.window_width, self.window_height])
 
