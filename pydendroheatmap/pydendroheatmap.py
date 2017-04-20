@@ -195,8 +195,6 @@ class DendroHeatMap(object):
             self.heat_map_cols = self.heat_map_data.shape[1]
 
             #add the from the labels to the figure
-            # print len(self.row_labels)
-            row_scale_factor = float(self.window_height) / self.heat_map_data.shape[0]
             for i in range(0, self.heat_map_rows):
                 if(self.row_labels):
                     if(len(self.row_labels) < self.max_row_labels):
@@ -205,7 +203,7 @@ class DendroHeatMap(object):
             for i in range(0, self.heat_map_cols):
                 if(self.col_labels):
                     if(len(self.col_labels) < self.max_col_labels):
-                        self.heat_map_axes.text(i-0.2, self.heat_map_rows-self.heat_map_rows-0.5, ' '+self.col_labels[i], size=self.col_labels_size, rotation=270,verticalalignment='top')
+                        self.heat_map_axes.text(i-1/2, self.heat_map_rows-self.heat_map_rows-0.5, ' '+self.col_labels[i], size=self.col_labels_size, rotation=270,verticalalignment='top')
 
 
         #plot the column colorbar
