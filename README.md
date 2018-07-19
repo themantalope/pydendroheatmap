@@ -1,4 +1,4 @@
-#pydendroheatmap - a plotting tool for making heatmaps with hierarchically clustered data in python.
+# pydendroheatmap - a plotting tool for making heatmaps with hierarchically clustered data in python.
 ---------------------------------------------------------------------------------------------------
 pydendroheatmap is registered as a package on PyPI, so to install, simply type
 
@@ -70,4 +70,3 @@ in the new plot.
 
 A special thanks to [Nathan Salomonis](http://www.cincinnatichildrens.org/bio/s/nathan-salomonis/) for posting the
 original example and figuring out much of the parameters for getting the plots in the correct position!
-
