@@ -171,7 +171,7 @@ class DendroHeatMap(object):
         matplotlib.rcParams.update({"font.size":self.font_size})
 
         if(self.verbose):
-            print 'Rendering plot...'
+            print('Rendering plot...')
 
         self.figure = pylab.figure(figsize=[self.window_width, self.window_height])
 
@@ -206,7 +206,7 @@ class DendroHeatMap(object):
             for i in range(0, self.heat_map_rows):
                 if(self.row_labels):
                     if(len(self.row_labels) < self.max_row_labels):
-                        self.heat_map_axes.text(self.heat_map_cols-0.5, i-2, ' '+self.row_labels[i], size=self.row_labels_size)
+                        self.heat_map_axes.text(self.heat_map_cols-0.5, i-0.5, ' '+self.row_labels[i], size=self.row_labels_size)
 
             for i in range(0, self.heat_map_cols):
                 if(self.col_labels):
