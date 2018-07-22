@@ -7,7 +7,7 @@ def readme():
     return text
 
 setup(name='pydendroheatmap',
-      version='1.4',
+      version='1.5',
       description='Tool for creating heatmaps, where rows and columns are organized by hierarchical clusters'
                   ' as seen in http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/',
       url='https://github.com/themantalope/pydendroheatmap',
