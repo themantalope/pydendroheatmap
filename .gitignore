@@ -2,3 +2,5 @@
 .idea*
 dist*
 *.egg-info*
+*cache*
+*.pyc

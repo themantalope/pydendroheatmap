@@ -1,9 +1,9 @@
 from setuptools import setup
 
 def readme():
-    f = open('README.md','r')
-    text = f.read()
-    f.close()
+    with open('README.md', 'r') as f:
+        text = f.read()
+
     return text
 
 setup(name='pydendroheatmap',
