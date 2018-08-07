@@ -76,9 +76,7 @@ class DendroHeatMap(object):
                  col_labels=None,
                  max_col_labels=100,
                  col_labels_size=8,
-                 left_colorbar_labels = None,
-                 left_colorbar_legend_names = None,
-                 font_size = 20,
+                 font_size = 9,
                  verbose=False):
 
         self.figure = None
@@ -159,10 +157,6 @@ class DendroHeatMap(object):
         self.font_size = font_size
         self.exportDPI = 600
 
-        self.left_colorbar_labels = left_colorbar_labels
-        self.left_colorbar_legend_names = left_colorbar_legend_names
-
-
 
 
 
@@ -201,18 +195,11 @@ class DendroHeatMap(object):
             self.heat_map_cols = self.heat_map_data.shape[1]
 
             #add the from the labels to the figure
-            # print len(self.row_labels)
-            row_scale_factor = float(self.window_height) / self.heat_map_data.shape[0]
             for i in range(0, self.heat_map_rows):
                 if(self.row_labels):
                     if(len(self.row_labels) < self.max_row_labels):
+                        self.heat_map_axes.text(self.heat_map_cols-0.5, i-1/2, ' '+self.row_labels[i], size=self.row_labels_size)
                         self.heat_map_axes.text(self.heat_map_cols-0.5, i-0.5, ' '+self.row_labels[i], size=self.row_labels_size)
-
-            for i in range(0, self.heat_map_cols):
-                if(self.col_labels):
-                    if(len(self.col_labels) < self.max_col_labels):
-                        self.heat_map_axes.text(i-0.2, self.heat_map_rows-self.heat_map_rows-0.5, ' '+self.col_labels[i], size=self.col_labels_size, rotation=270,verticalalignment='top')
-
 
         #plot the column colorbar
         if(not self.top_dendrogram is None):
