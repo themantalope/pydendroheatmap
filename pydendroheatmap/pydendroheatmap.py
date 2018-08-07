@@ -199,12 +199,7 @@ class DendroHeatMap(object):
                 if(self.row_labels):
                     if(len(self.row_labels) < self.max_row_labels):
                         self.heat_map_axes.text(self.heat_map_cols-0.5, i-1/2, ' '+self.row_labels[i], size=self.row_labels_size)
-
-            for i in range(0, self.heat_map_cols):
-                if(self.col_labels):
-                    if(len(self.col_labels) < self.max_col_labels):
-                        self.heat_map_axes.text(i-1/2, self.heat_map_rows-self.heat_map_rows-0.5, ' '+self.col_labels[i], size=self.col_labels_size, rotation=270,verticalalignment='top')
-
+                        self.heat_map_axes.text(self.heat_map_cols-0.5, i-0.5, ' '+self.row_labels[i], size=self.row_labels_size)
 
         #plot the column colorbar
         if(not self.top_dendrogram is None):
